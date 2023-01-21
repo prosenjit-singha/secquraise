@@ -1,5 +1,13 @@
+import Details from "./Details";
+import Events from "./Events";
+
 function Home() {
-  return <div>Home</div>;
+  return (
+    <>
+      <Details />
+      <Events />
+    </>
+  );
 }
 
 export default Home;
