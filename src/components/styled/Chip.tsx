@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import { styled, css } from "@mui/material";
 
 type Props = {
   startIcon?: React.ReactNode;
@@ -21,7 +21,7 @@ interface Chip {
   color?: string;
 }
 
-const Container = styled.span<Chip>`
+const Container = styled("span")<Chip>`
   padding: 0.25rem 0.5rem;
   border-radius: var(--border-radius-md);
   display: flex;

@@ -1,9 +1,9 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { darkMode, lightMode } from "./mode";
-import { DefaultTheme } from "styled-components";
+import { Theme } from "@mui/material";
 
 type Value = {
-  theme: DefaultTheme;
+  theme: Theme;
   mode: "light" | "dark";
   toggleTheme: () => void;
 };

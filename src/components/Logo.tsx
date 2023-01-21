@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { styled } from "@mui/material";
 import logo from "../assets/logo-250px.png";
 
 type Props = Omit<React.ComponentProps<typeof Container>, "to">;
@@ -15,7 +15,7 @@ function Logo(props: Props) {
 
 export default Logo;
 
-const Image = styled.img``;
+const Image = styled("img")``;
 
 const Container = styled(Link)`
   display: flex;
