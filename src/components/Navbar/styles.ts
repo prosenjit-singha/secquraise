@@ -9,3 +9,8 @@ export const Container = styled.header`
   align-items: center;
   justify-content: flex-end;
 `;
+
+export const Chips = styled.div`
+  display: flex;
+  gap: 0.35rem;
+`;
