@@ -1,4 +1,6 @@
-const darkMode = {
+import { DefaultTheme } from "styled-components";
+
+export const darkMode: DefaultTheme = {
   palette: {
     mode: "dark",
     primary: {
@@ -59,5 +61,3 @@ const darkMode = {
     },
   },
 };
-
-export default darkMode;
