@@ -76,7 +76,11 @@ function Navbar() {
             aria-label="Female Count"
           />
         </Stack>
-        <IconButton onClick={toggleTheme}>
+        <IconButton
+          onClick={toggleTheme}
+          title="Toggle Theme"
+          aria-label="Toggle Theme"
+        >
           {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
         </IconButton>
       </Toolbar>
