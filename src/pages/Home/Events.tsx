@@ -10,6 +10,8 @@ import {
   ListItemText,
   ListItemButton,
   Skeleton,
+  lighten,
+  darken,
 } from "@mui/material";
 import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 import { useQuery } from "@tanstack/react-query";
@@ -41,7 +43,7 @@ function Events() {
   // console.info(data);
   return (
     <Paper
-      elevation={3}
+      elevation={5}
       sx={{
         position: "sticky",
         top: "75px",
@@ -86,14 +88,26 @@ function Events() {
             sx={(theme) => ({
               px: 1,
               py: 0,
+              mb: 1,
               borderRadius: 2,
-              border: `1px solid ${
+              bgcolor:
                 eventID === event.ID
-                  ? theme.palette.primary.main
-                  : "transparent"
-              }`,
+                  ? theme.palette.mode === "dark"
+                    ? theme.palette.primary.dark
+                    : theme.palette.primary.light
+                  : theme.palette.mode === "dark"
+                  ? lighten(theme.palette.background.paper, 0.05)
+                  : darken(theme.palette.background.paper, 0.075),
               ":hover": {
-                outline: `1px solid ${theme.palette.divider}`,
+                bgcolor:
+                  eventID === event.ID
+                    ? theme.palette.mode === "dark"
+                      ? theme.palette.primary.dark
+                      : theme.palette.primary.light
+                    : theme.palette.mode === "dark"
+                    ? lighten(theme.palette.background.paper, 0.05)
+                    : darken(theme.palette.background.paper, 0.075),
+                outline: `2px solid ${theme.palette.divider}`,
               },
             })}
             key={event.ID}
