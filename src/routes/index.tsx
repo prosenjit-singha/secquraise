@@ -11,6 +11,10 @@ const router = createBrowserRouter([
         path: "",
         element: <Home />,
       },
+      {
+        path: ":eventID",
+        element: <Home />,
+      },
     ],
   },
 ]);

@@ -28,6 +28,14 @@ export const commonStyles: ThemeOptions = {
         variant: "rectangular",
       },
     },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          borderBottom: "none",
+          paddingInline: 8,
+        },
+      },
+    },
   },
   typography: {
     fontFamily: '"Poppins", "Roboto","Helvetica","Arial",sans-serif',
