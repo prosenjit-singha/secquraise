@@ -39,7 +39,7 @@ function Details() {
     return (
       <Grid
         container
-        sx={{ width: "70%", height: "fit-content", py: 3, px: 2 }}
+        sx={{ width: "60%", height: "fit-content", py: 3, px: 2 }}
       >
         <Grid
           item
@@ -97,7 +97,7 @@ function Details() {
       </Grid>
     );
 
-  return <Box sx={{ width: "70%" }}></Box>;
+  return <Box sx={{ width: "60%" }}></Box>;
 }
 
 export default Details;

@@ -20,6 +20,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 // icons
 import ClockIcon from "@mui/icons-material/AccessTimeRounded";
 import CalendarIcon from "@mui/icons-material/CalendarMonthRounded";
+import { blue } from "@mui/material/colors";
 
 function Events() {
   const navigate = useNavigate();
@@ -41,14 +42,28 @@ function Events() {
   return (
     <Paper
       elevation={3}
-      sx={{ width: "40%", minWidth: "355px", m: 1, mr: [2, 3], p: [1, 2] }}
+      sx={{
+        position: "relative",
+        width: "40%",
+        minWidth: "355px",
+        maxHeight: "calc(100vh - 80px)",
+        overflow: "auto",
+        m: 1,
+        mr: [2, 3],
+      }}
     >
       {/* Header */}
-      <Box
+      <Paper
         sx={{
+          position: "sticky",
+          top: 0,
+          left: 0,
+          width: "100%",
+          p: 2,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          zIndex: 2,
         }}
       >
         <Typography variant="h5" component="h1">
@@ -57,10 +72,10 @@ function Events() {
         <IconButton title="Filter">
           <TuneRoundedIcon />
         </IconButton>
-      </Box>
+      </Paper>
       {/* List */}
 
-      <List>
+      <List sx={{ px: [1, 2] }}>
         {isLoading && [...Array(10)].map((_, i) => <ListSkeleton key={i} />)}
         {data.map((event) => (
           <ListItemButton
