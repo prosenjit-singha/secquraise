@@ -14,7 +14,7 @@ import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Event } from "../../../types/event.type";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 // icons
 import ClockIcon from "@mui/icons-material/AccessTimeRounded";
@@ -27,6 +27,7 @@ import DatePicker from "./DatePicker";
 function Events() {
   const [location, setLocation] = useState("");
   const [gender, setGender] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [openFilter, setOpenFilter] = useState(false);
   const { eventID } = useParams();
@@ -40,6 +41,19 @@ function Events() {
 
   const locationList = ["Chennai", "Hyderabad", "Bangalore"];
   const genderList = ["male", "female"];
+
+  const onDropItemClick = (label: string, v: string) => {
+    let prevParams = Object.fromEntries([...searchParams]);
+    if (!v) {
+      delete prevParams[label.toLowerCase()];
+      setSearchParams(prevParams);
+      return;
+    }
+    setSearchParams({
+      ...prevParams,
+      [label.toLowerCase()]: v,
+    });
+  };
 
   return (
     <Paper
@@ -84,19 +98,21 @@ function Events() {
             <TuneRoundedIcon />
           </IconButton>
         </Box>
-        <Collapse in={openFilter} sx={{}}>
-          <Box display="flex" gap="8px" mb={1}>
+        <Collapse in={openFilter}>
+          <Box display="flex" gap="8px" mb={1.5} mt={1}>
             <Dropdown
               label="Location"
               list={locationList}
               value={location}
               setValue={setLocation}
+              onClick={onDropItemClick}
             />
             <Dropdown
               label="Gender"
               value={gender}
               setValue={setGender}
               list={genderList}
+              onClick={onDropItemClick}
             />
           </Box>
           <DatePicker />
@@ -107,7 +123,7 @@ function Events() {
       <List sx={{ px: [1, 2] }}>
         {isLoading && [...Array(10)].map((_, i) => <ListSkeleton key={i} />)}
         {data.map((event) => (
-          <EventListItem event={event} eventID={eventID} />
+          <EventListItem event={event} eventID={eventID} key={event.ID} />
         ))}
       </List>
     </Paper>

@@ -31,6 +31,7 @@ function Details() {
       axios
         .get("https://secquraise-pj-default-rtdb.firebaseio.com/events.json")
         .then((res) => res.data.find((event: Event) => event.ID === eventID)),
+    enabled: !!eventID,
   });
 
   const getDate = (value: string) => {

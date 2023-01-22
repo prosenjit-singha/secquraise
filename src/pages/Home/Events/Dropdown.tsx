@@ -12,6 +12,7 @@ type Props<T> = {
   value: string;
   list: T[];
   setValue: React.Dispatch<React.SetStateAction<string>>;
+  onClick: (label: string, value: string) => void;
 };
 
 function Dropdown<T extends string>({
@@ -19,9 +20,11 @@ function Dropdown<T extends string>({
   value,
   list,
   setValue,
+  onClick,
 }: Props<T>) {
   const handleChange = (e: SelectChangeEvent) => {
     setValue(e.target.value);
+    onClick(label, e.target.value);
   };
   return (
     <FormControl sx={{ minWidth: 120, width: "50%" }} size="small">
@@ -37,7 +40,9 @@ function Dropdown<T extends string>({
           <em>None</em>
         </MenuItem>
         {list.map((v) => (
-          <MenuItem value={v}>{v}</MenuItem>
+          <MenuItem key={v} value={v}>
+            {v}
+          </MenuItem>
         ))}
       </Select>
     </FormControl>

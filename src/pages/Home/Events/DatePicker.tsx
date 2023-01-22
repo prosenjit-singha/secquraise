@@ -1,13 +1,14 @@
 import * as React from "react";
-import { format } from "date-fns";
+import { Dayjs } from "dayjs";
 import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker as DP } from "@mui/x-date-pickers/DatePicker";
+import { useSearchParams } from "react-router-dom";
 
 function DatePicker() {
-  const [value, setValue] = React.useState<Date | null>(null);
-  console.info(value);
+  const [value, setValue] = React.useState<Dayjs | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DP
@@ -15,9 +16,19 @@ function DatePicker() {
         value={value}
         onChange={(newValue) => {
           setValue(newValue);
+          const prevData = Object.fromEntries([...searchParams]);
+          if (newValue) {
+            setSearchParams({
+              ...prevData,
+              date: newValue?.format("DD-MM-YYYY") || "",
+            });
+          } else {
+            delete prevData.date;
+            setSearchParams(prevData);
+          }
         }}
         renderInput={(params) => (
-          <TextField {...params} size="small" fullWidth />
+          <TextField {...params} size="small" autoComplete="off" fullWidth />
         )}
       />
     </LocalizationProvider>
