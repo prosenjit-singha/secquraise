@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { Box, Stack, IconButton } from "@mui/material";
+import { Box, Stack, IconButton, lighten } from "@mui/material";
 // icons
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -20,7 +20,14 @@ function Root() {
         }}
       >
         {/* Left Bar Starts */}
-        <Stack sx={{ bgcolor: "primary.main", pl: [2, 3], pr: 2 }}>
+        <Stack
+          sx={(theme) => ({
+            bgcolor: lighten(theme.palette.background.paper, 0.035),
+            borderRight: `1px solid ${theme.palette.divider}`,
+            pl: [2, 3],
+            pr: 2,
+          })}
+        >
           <IconButton title="Menu" aria-label="Menu">
             <MenuIcon />
           </IconButton>

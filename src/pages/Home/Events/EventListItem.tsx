@@ -1,4 +1,3 @@
-import React from "react";
 import ClockIcon from "@mui/icons-material/AccessTimeRounded";
 import CalendarIcon from "@mui/icons-material/CalendarMonthRounded";
 import {
@@ -14,6 +13,7 @@ import {
 } from "@mui/material";
 import { Event } from "../../../types/event.type";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 
 type Props = {
   event: Event;
@@ -91,7 +91,7 @@ function EventListItem({ event, eventID }: Props) {
               },
             }}
           >
-            {event.Date}
+            {dayjs(event.Date).format("DD/MM/YYYY")}
           </ListItemText>
         </ListItem>
       </Grid>

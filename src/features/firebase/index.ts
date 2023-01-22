@@ -1,6 +1,6 @@
 import { app } from "./config";
-import { getStorage } from "firebase/storage";
+import { getDatabase } from "firebase/database";
 
-export const firebaseStorage = getStorage(app);
+export const db = getDatabase(app);
 
 export default app;

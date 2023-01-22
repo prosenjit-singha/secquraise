@@ -23,6 +23,7 @@ import EventListItem from "./EventListItem";
 import { useState } from "react";
 import Dropdown from "./Dropdown";
 import DatePicker from "./DatePicker";
+import filterEvents from "../../../utils/filterEvents";
 
 function Events() {
   const [location, setLocation] = useState("");
@@ -31,12 +32,19 @@ function Events() {
 
   const [openFilter, setOpenFilter] = useState(false);
   const { eventID } = useParams();
+
   const { data = [], isLoading } = useQuery<Event[]>({
     queryKey: ["events"],
     queryFn: async () =>
       axios
         .get("https://secquraise-pj-default-rtdb.firebaseio.com/events.json")
         .then((res) => res.data),
+    select: (data) =>
+      filterEvents(data, {
+        location,
+        gender,
+        date: searchParams.get("date") || "",
+      }),
   });
 
   const locationList = ["Chennai", "Hyderabad", "Bangalore"];
@@ -77,6 +85,7 @@ function Events() {
           left: 0,
           width: "100%",
           p: 2,
+          borderRadius: 0,
           zIndex: 2,
         }}
       >

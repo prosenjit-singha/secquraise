@@ -1,12 +1,15 @@
 import React, { useEffect } from "react";
-import { ref, listAll, getDownloadURL } from "firebase/storage";
-import { firebaseStorage } from "../../features/firebase";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 function EventsProvider({ children }: { children: React.ReactNode }) {
-  const imagesListRef = ref(firebaseStorage, "Images/");
-
-  const getPhotoURL = (name: string) =>
-    `"https://firebasestorage.googleapis.com/v0/b/secquraise-pj.appspot.com/o/Images%2F${name}.jpg?alt=media";`;
+  const { data = [], isLoading } = useQuery<Event[]>({
+    queryKey: ["events"],
+    queryFn: async () =>
+      axios
+        .get("https://secquraise-pj-default-rtdb.firebaseio.com/events.json")
+        .then((res) => res.data),
+  });
 
   return <div>{children}</div>;
 }

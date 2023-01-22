@@ -20,7 +20,7 @@ function DatePicker() {
           if (newValue) {
             setSearchParams({
               ...prevData,
-              date: newValue?.format("DD-MM-YYYY") || "",
+              date: newValue?.format("D-MMM-YY") || "",
             });
           } else {
             delete prevData.date;

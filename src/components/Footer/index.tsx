@@ -9,6 +9,7 @@ function Footer() {
         gap: 1,
         py: [2, 3],
         bgcolor: lighten(theme.palette.background.paper, 0.05),
+        borderTop: `1px solid ${theme.palette.divider}`,
       })}
     >
       <Logo />
