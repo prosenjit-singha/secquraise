@@ -15,7 +15,7 @@ function Root() {
         sx={{
           mt: [8],
           display: "flex",
-          minHeight: "calc(100vh - 64px)",
+          minHeight: "calc(200vh - 64px)",
           alignItems: "stretch",
         }}
       >

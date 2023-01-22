@@ -9,6 +9,8 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  styled,
+  Stack,
 } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useSearchParams } from "react-router-dom";
@@ -35,15 +37,13 @@ function Details() {
     return format(new Date(value), "PPP");
   };
 
+  const getPhotoURL = (name: string) =>
+    `https://firebasestorage.googleapis.com/v0/b/secquraise-pj.appspot.com/o/Images%2F${name}.jpg?alt=media`;
+
   if (data)
     return (
-      <Grid
-        container
-        sx={{ width: "60%", height: "fit-content", py: 3, px: 2 }}
-      >
-        <Grid
-          item
-          xs={12}
+      <Stack sx={{ width: "60%", height: "fit-content", py: 3, px: 2 }}>
+        <Box
           sx={{
             height: "fit-content",
             display: "flex",
@@ -56,9 +56,14 @@ function Details() {
             color={data.Gender === "Female" ? "error" : "success"}
             label={data.Gender}
           />
-        </Grid>
-        <Grid item>
-          <Grid item>
+        </Box>
+        <Stack
+          sx={{
+            flexDirection: ["column-reverse", "column-reverse", "row"],
+            gap: [2, 3, 1],
+          }}
+        >
+          <Box sx={{ width: "100%" }}>
             <Typography variant="h5">{data.ID}</Typography>
             <Typography variant="h6">Person Detected</Typography>
 
@@ -91,13 +96,29 @@ function Details() {
             <Typography>{`${data.Name} detected at ${
               data.Location
             } on ${getDate(data.Date)}`}</Typography>
-          </Grid>
-          <Grid item></Grid>
-        </Grid>
-      </Grid>
+          </Box>
+          <Box
+            width="100%"
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Image src={getPhotoURL(data.Name)} alt={data.Name} />
+          </Box>
+        </Stack>
+      </Stack>
     );
 
   return <Box sx={{ width: "60%" }}></Box>;
 }
 
 export default Details;
+
+const Image = styled("img")`
+  width: clamp(30px, 100%, 250px);
+  aspect-ratio: 9/12;
+  object-fit: cover;
+  border-radius: 12px;
+`;
