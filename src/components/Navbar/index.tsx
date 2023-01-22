@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import MaleIcon from "@mui/icons-material/Person";
 import FemaleIcon from "@mui/icons-material/Person2";
 import SearchIcon from "@mui/icons-material/Search";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+
 import Logo from "../Logo";
 import {
   AppBar,
@@ -13,11 +16,20 @@ import {
   Box,
   InputBase,
   IconButton,
+  lighten,
 } from "@mui/material";
+import { useThemeToggler } from "../../contexts/ThemeProvider";
 
 function Navbar() {
+  const { mode, toggleTheme } = useThemeToggler();
   return (
-    <AppBar sx={{ bgcolor: colors.indigo[100], boxShadow: "none" }}>
+    <AppBar
+      sx={(theme) => ({
+        boxShadow: "none",
+        borderBottom: `1px solid ${theme.palette.divider}`,
+        bgcolor: lighten(theme.palette.background.paper, 0.05),
+      })}
+    >
       <Toolbar>
         <Logo />
 
@@ -64,6 +76,9 @@ function Navbar() {
             aria-label="Female Count"
           />
         </Stack>
+        <IconButton onClick={toggleTheme}>
+          {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
