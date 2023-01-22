@@ -14,7 +14,9 @@ import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Event } from "../../types/event.type";
+import { useSearchParams } from "react-router-dom";
 
+// icons
 import ClockIcon from "@mui/icons-material/AccessTimeRounded";
 import CalendarIcon from "@mui/icons-material/CalendarMonthRounded";
 
@@ -27,7 +29,13 @@ function Events() {
         .then((res) => res.data),
   });
 
-  const handleEventClick = () => {};
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleEventClick = (eventID: string) => {
+    setSearchParams({
+      event: eventID,
+    });
+  };
   console.info(data);
   return (
     <Paper
@@ -54,11 +62,17 @@ function Events() {
       <List>
         {data.map((event) => (
           <ListItemButton
+            onClick={() => handleEventClick(event.ID)}
             component={Grid}
             container
             sx={(theme) => ({
               p: 1,
               borderRadius: 2,
+              border: `1px solid ${
+                searchParams.get("event") === event.ID
+                  ? theme.palette.primary.main
+                  : "transparent"
+              }`,
               ":hover": {
                 outline: `1px solid ${theme.palette.divider}`,
               },
