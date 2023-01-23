@@ -1,4 +1,4 @@
-import { Stack, Typography, colors, lighten } from "@mui/material";
+import { Stack, Typography, lighten } from "@mui/material";
 import Logo from "../Logo";
 
 function Footer() {

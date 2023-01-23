@@ -1,8 +1,6 @@
 import {
   Box,
   Typography,
-  IconButton,
-  Grid,
   Chip,
   TableContainer,
   Table,
@@ -13,7 +11,7 @@ import {
   Stack,
 } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Event } from "../../types/event.type";
 

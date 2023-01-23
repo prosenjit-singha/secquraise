@@ -71,7 +71,6 @@ function Events() {
           position: "sticky",
           top: 0,
           left: 0,
-          // minWidth: "380px",
           width: "100%",
           p: 2,
           borderRadius: 0,

@@ -13,6 +13,8 @@ function Root() {
       <Box
         component="main"
         sx={{
+          maxWidth: "1366px",
+          mx: "auto",
           mt: [7, 8],
           display: "flex",
           minHeight: "calc(100vh - 64px)",
@@ -24,15 +26,15 @@ function Root() {
           sx={(theme) => ({
             bgcolor: lighten(theme.palette.background.paper, 0.035),
             borderRight: `1px solid ${theme.palette.divider}`,
-            pl: [2, 3],
-            pr: 2,
+            px: 2,
+            py: 1,
           })}
         >
           <Stack
             sx={{
               position: "sticky",
               top: ["56px", "64px"],
-              minHeight: ["calc(100vh - 64px)"],
+              minHeight: ["calc(100vh - 80px)"],
             }}
           >
             <IconButton title="Menu" aria-label="Menu">

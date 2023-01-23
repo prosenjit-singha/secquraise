@@ -5,7 +5,6 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import { useState } from "react";
 
 type Props<T> = {
   label: string;

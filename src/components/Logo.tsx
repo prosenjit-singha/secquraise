@@ -7,7 +7,7 @@ type Props = Omit<React.ComponentProps<typeof Container>, "to">;
 
 function Logo(props: Props) {
   return (
-    <Container style={props.style} to="/">
+    <Container {...props} to="/">
       <Image src={logo} alt="SecqurAIse" />
     </Container>
   );

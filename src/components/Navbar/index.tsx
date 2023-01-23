@@ -33,8 +33,8 @@ function Navbar() {
         bgcolor: lighten(theme.palette.background.paper, 0.05),
       })}
     >
-      <Toolbar>
-        <Logo />
+      <Toolbar sx={{ width: "100%", maxWidth: "1366px", mx: "auto" }}>
+        <Logo sx={{ display: ["none", "block"] }} />
 
         {/* Search Icons */}
         <Box
