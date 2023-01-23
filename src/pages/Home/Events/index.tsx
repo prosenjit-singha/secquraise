@@ -24,14 +24,17 @@ import { useState } from "react";
 import Dropdown from "./Dropdown";
 import DatePicker from "./DatePicker";
 import filterEvents from "../../../utils/filterEvents";
+import { useEvents } from "../../../contexts/EventsProvider";
 
 function Events() {
-  const [location, setLocation] = useState("");
-  const [gender, setGender] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-
   const [openFilter, setOpenFilter] = useState(false);
   const { eventID } = useParams();
+
+  const {
+    setFilterOpt,
+    filterOpt: { location, gender },
+  } = useEvents();
 
   const { data = [], isLoading } = useQuery<Event[]>({
     queryKey: ["events"],
@@ -51,6 +54,7 @@ function Events() {
   const genderList = ["male", "female"];
 
   const onDropItemClick = (label: string, v: string) => {
+    setFilterOpt((prev) => ({ ...prev, [label.toLowerCase()]: v }));
     let prevParams = Object.fromEntries([...searchParams]);
     if (!v) {
       delete prevParams[label.toLowerCase()];
@@ -100,14 +104,12 @@ function Events() {
             <Dropdown
               label="Location"
               list={locationList}
-              value={location}
-              setValue={setLocation}
+              defaultValue={location}
               onClick={onDropItemClick}
             />
             <Dropdown
               label="Gender"
-              value={gender}
-              setValue={setGender}
+              defaultValue={gender}
               list={genderList}
               onClick={onDropItemClick}
             />

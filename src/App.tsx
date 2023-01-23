@@ -3,7 +3,6 @@ import { ThemeProvider, GlobalStyles, CssBaseline } from "@mui/material";
 import { useThemeToggler } from "./contexts/ThemeProvider";
 import router from "./routes";
 import { globalStyles } from "./styles/global.styles";
-import EventsProvider from "./contexts/EventsProvider";
 
 function App() {
   const { theme } = useThemeToggler();
@@ -11,9 +10,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <GlobalStyles styles={(p) => globalStyles(p)} />
-      <EventsProvider>
-        <RouterProvider router={router} />
-      </EventsProvider>
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }

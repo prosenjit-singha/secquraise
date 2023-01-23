@@ -5,10 +5,11 @@ import { Box, Stack, IconButton, lighten } from "@mui/material";
 // icons
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
+import EventsProvider from "../contexts/EventsProvider";
 
 function Root() {
   return (
-    <>
+    <EventsProvider>
       <Navbar />
       <Box
         component="main"
@@ -50,7 +51,7 @@ function Root() {
         <Outlet />
       </Box>
       <Footer />
-    </>
+    </EventsProvider>
   );
 }
 

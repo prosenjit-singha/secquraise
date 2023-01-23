@@ -33,10 +33,6 @@ function Details() {
     enabled: !!eventID,
   });
 
-  const getDate = (value: string) => {
-    return format(new Date(value), "PPP");
-  };
-
   const getPhotoURL = (name: string) =>
     `https://firebasestorage.googleapis.com/v0/b/secquraise-pj.appspot.com/o/Images%2F${name}.jpg?alt=media`;
 
@@ -107,10 +103,11 @@ function Details() {
             </TableContainer>
 
             {/* Description */}
-            <Typography sx={{ mt: 0.5 }}>Description:</Typography>
-            <Typography>{`${data.Name} detected at ${
-              data.Location
-            } on ${getDate(data.Date)}`}</Typography>
+            <Typography sx={{ mt: [1, 2] }}>Description:</Typography>
+            <Typography>
+              {`${data.Name} detected at ${data.Location} on `}
+              <FormatDate value={data.Date} />.
+            </Typography>
           </Box>
           <Box
             width="100%"
@@ -131,6 +128,15 @@ function Details() {
 
 export default Details;
 
+const FormatDate = ({ value }: { value: string }) => {
+  return (
+    <>
+      {format(new Date(value), "d")}
+      <sup>th</sup>
+      {format(new Date(value), "LLLL")}, {format(new Date(value), "yyyy")}
+    </>
+  );
+};
 const Image = styled("img")`
   width: clamp(30px, 100%, 250px);
   aspect-ratio: 9/12;

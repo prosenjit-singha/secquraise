@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MaleIcon from "@mui/icons-material/Person";
 import FemaleIcon from "@mui/icons-material/Person2";
 import SearchIcon from "@mui/icons-material/Search";
@@ -19,11 +19,21 @@ import {
 import { useThemeToggler } from "../../contexts/ThemeProvider";
 import EventsIcon from "@mui/icons-material/EventNote";
 import Events from "../../pages/Home/Events";
+import { useBreakpoint } from "react-use-size";
+import { useEvents } from "../../contexts/EventsProvider";
+import genderCount from "../../utils/genderCount";
 
 function Navbar() {
   const { mode, toggleTheme } = useThemeToggler();
-
+  const isMd = useBreakpoint(900);
   const [openEvents, setOpenEvents] = useState(false);
+  const { data } = useEvents();
+
+  const genderCountInfo = genderCount(data);
+
+  useEffect(() => {
+    if (!isMd) setOpenEvents(false);
+  }, [isMd]);
 
   return (
     <AppBar
@@ -70,13 +80,13 @@ function Navbar() {
           <Chip
             icon={<MaleIcon aria-label="Male Icon" />}
             color="success"
-            label="20"
+            label={genderCountInfo.male}
             aria-label="Male Count"
           />
           <Chip
             icon={<FemaleIcon aria-label="Female Icon" />}
             color="error"
-            label="20"
+            label={genderCountInfo.female}
             aria-label="Female Count"
           />
         </Stack>
