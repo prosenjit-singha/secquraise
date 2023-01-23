@@ -7,7 +7,7 @@ function Home() {
     <>
       <Details />
       <Paper
-        elevation={5}
+        elevation={4}
         sx={{
           display: ["none", "none", "block"],
           position: "sticky",

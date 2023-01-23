@@ -25,7 +25,7 @@ export const commonStyles: ThemeOptions = {
     },
     MuiSkeleton: {
       defaultProps: {
-        variant: "rectangular",
+        variant: "rounded",
       },
     },
     MuiTableCell: {

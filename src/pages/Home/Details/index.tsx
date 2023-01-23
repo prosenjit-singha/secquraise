@@ -9,21 +9,22 @@ import {
   TableCell,
   styled,
   Stack,
+  Skeleton,
 } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Event } from "../../types/event.type";
+import { Event } from "../../../types/event.type";
 
 // icons
 import MaleIcon from "@mui/icons-material/MaleRounded";
 import FemaleIcon from "@mui/icons-material/FemaleRounded";
 import { format } from "date-fns";
+import LoadingSkeleton from "./LoadingSkeleton";
 
 function Details() {
   const { eventID } = useParams();
-
-  const { data } = useQuery<Event>({
+  const { data, isLoading } = useQuery<Event>({
     queryKey: ["event", eventID],
     queryFn: async () =>
       axios
@@ -38,6 +39,8 @@ function Details() {
 
   const getPhotoURL = (name: string) =>
     `https://firebasestorage.googleapis.com/v0/b/secquraise-pj.appspot.com/o/Images%2F${name}.jpg?alt=media`;
+
+  if (isLoading) return <LoadingSkeleton />;
 
   if (data)
     return (
@@ -54,14 +57,18 @@ function Details() {
             height: "fit-content",
             display: "flex",
             justifyContent: "center",
-            mb: 2,
+            mb: [3, 4, 5],
           }}
         >
-          <Chip
-            icon={data.Gender === "Male" ? <MaleIcon /> : <FemaleIcon />}
-            color={data.Gender === "Female" ? "error" : "success"}
-            label={data.Gender}
-          />
+          {isLoading ? (
+            <Skeleton width={150} sx={{ borderRadius: 3 }} height={30} />
+          ) : (
+            <Chip
+              icon={data.Gender === "Male" ? <MaleIcon /> : <FemaleIcon />}
+              color={data.Gender === "Female" ? "error" : "success"}
+              label={data.Gender}
+            />
+          )}
         </Box>
         <Stack
           sx={{
@@ -70,7 +77,9 @@ function Details() {
           }}
         >
           <Box sx={{ width: "100%" }}>
-            <Typography variant="h5">{data.ID}</Typography>
+            <Typography variant="h5">
+              {isLoading ? <Skeleton /> : data.ID}
+            </Typography>
             <Typography variant="h6">Person Detected</Typography>
 
             {/* Person Data */}
@@ -98,7 +107,7 @@ function Details() {
             </TableContainer>
 
             {/* Description */}
-            <Typography>Description:</Typography>
+            <Typography sx={{ mt: 0.5 }}>Description:</Typography>
             <Typography>{`${data.Name} detected at ${
               data.Location
             } on ${getDate(data.Date)}`}</Typography>
@@ -117,7 +126,7 @@ function Details() {
       </Stack>
     );
 
-  return <Box sx={{ width: "60%" }}></Box>;
+  return <Box sx={{ width: ["100%", "100%", "60%", "70%"] }}></Box>;
 }
 
 export default Details;
