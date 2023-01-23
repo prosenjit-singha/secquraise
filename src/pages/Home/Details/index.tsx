@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -9,34 +10,31 @@ import {
   TableCell,
   styled,
   Stack,
-  Skeleton,
 } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { Event } from "../../../types/event.type";
 
 // icons
 import MaleIcon from "@mui/icons-material/MaleRounded";
 import FemaleIcon from "@mui/icons-material/FemaleRounded";
 import { format } from "date-fns";
-import LoadingSkeleton from "./LoadingSkeleton";
+// import LoadingSkeleton from "./LoadingSkeleton";
+import { useEvents } from "../../../contexts/EventsProvider";
 
 function Details() {
   const { eventID } = useParams();
-  const { data, isLoading } = useQuery<Event>({
-    queryKey: ["event", eventID],
-    queryFn: async () =>
-      axios
-        .get("https://secquraise-pj-default-rtdb.firebaseio.com/events.json")
-        .then((res) => res.data.find((event: Event) => event.ID === eventID)),
-    enabled: !!eventID,
-  });
+  const { data: dataList } = useEvents();
+  const [data, setData] = useState<Event | null>(null);
+
+  useEffect(() => {
+    const result = dataList.find((event) => event.ID === eventID);
+    setData(result || null);
+  }, [eventID, dataList]);
 
   const getPhotoURL = (name: string) =>
     `https://firebasestorage.googleapis.com/v0/b/secquraise-pj.appspot.com/o/Images%2F${name}.jpg?alt=media`;
 
-  if (isLoading) return <LoadingSkeleton />;
+  // if (isLoading) return <LoadingSkeleton />;
 
   if (data)
     return (
@@ -56,15 +54,11 @@ function Details() {
             mb: [3, 4, 5],
           }}
         >
-          {isLoading ? (
-            <Skeleton width={150} sx={{ borderRadius: 3 }} height={30} />
-          ) : (
-            <Chip
-              icon={data.Gender === "Male" ? <MaleIcon /> : <FemaleIcon />}
-              color={data.Gender === "Female" ? "error" : "success"}
-              label={data.Gender}
-            />
-          )}
+          <Chip
+            icon={data.Gender === "Male" ? <MaleIcon /> : <FemaleIcon />}
+            color={data.Gender === "Female" ? "error" : "success"}
+            label={data.Gender}
+          />
         </Box>
         <Stack
           sx={{
@@ -73,9 +67,7 @@ function Details() {
           }}
         >
           <Box sx={{ width: "100%" }}>
-            <Typography variant="h5">
-              {isLoading ? <Skeleton /> : data.ID}
-            </Typography>
+            <Typography variant="h5">{data.ID}</Typography>
             <Typography variant="h6">Person Detected</Typography>
 
             {/* Person Data */}

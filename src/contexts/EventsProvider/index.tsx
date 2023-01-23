@@ -25,7 +25,7 @@ const EventsContext = createContext({} as Value);
 
 function EventsProvider({ children }: { children: React.ReactNode }) {
   const eventsRef = ref(database, "events");
-  const [searchParams, setSearchParam] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [isLoading, setLoading] = useState(true);
   const [events, setEvents] = useState<Event[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
@@ -58,7 +58,7 @@ function EventsProvider({ children }: { children: React.ReactNode }) {
       setFilterOpt(filterData);
       setEvents(data);
       setFilteredEvents(
-        filterEvents(events, {
+        filterEvents(data, {
           location: filterData.location,
           gender: filterData.gender,
           date: filterData.date
@@ -68,7 +68,7 @@ function EventsProvider({ children }: { children: React.ReactNode }) {
       );
       setLoading(false);
     });
-  }, []);
+  }, [eventsRef, searchParams]);
 
   useEffect(() => {
     setFilteredEvents(
@@ -78,7 +78,7 @@ function EventsProvider({ children }: { children: React.ReactNode }) {
         date: filterOpt.date ? filterOpt.date.format("D-MMM-YY") : undefined,
       })
     );
-  }, [filterOpt]);
+  }, [filterOpt, events]);
 
   // console.info(filteredEvents.length);
 

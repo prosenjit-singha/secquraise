@@ -11,9 +11,6 @@ import {
   Collapse,
 } from "@mui/material";
 import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { Event } from "../../../types/event.type";
 import { useParams, useSearchParams } from "react-router-dom";
 
 // icons
@@ -23,7 +20,6 @@ import EventListItem from "./EventListItem";
 import { useState } from "react";
 import Dropdown from "./Dropdown";
 import DatePicker from "./DatePicker";
-import filterEvents from "../../../utils/filterEvents";
 import { useEvents } from "../../../contexts/EventsProvider";
 
 function Events() {
@@ -36,20 +32,6 @@ function Events() {
     setFilterOpt,
     filterOpt: { location, gender },
   } = useEvents();
-
-  // const { data = [], isLoading } = useQuery<Event[]>({
-  //   queryKey: ["events"],
-  //   queryFn: async () =>
-  //     axios
-  //       .get("https://secquraise-pj-default-rtdb.firebaseio.com/events.json")
-  //       .then((res) => res.data),
-  //   select: (data) =>
-  //     filterEvents(data, {
-  //       location,
-  //       gender,
-  //       date: searchParams.get("date") || "",
-  //     }),
-  // });
 
   const locationList = ["Chennai", "Hyderabad", "Bangalore"];
   const genderList = ["male", "female"];
