@@ -12,7 +12,7 @@ import {
   darken,
 } from "@mui/material";
 import { Event } from "../../../types/event.type";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 
 type Props = {
@@ -22,8 +22,12 @@ type Props = {
 
 function EventListItem({ event, eventID }: Props) {
   const navigate = useNavigate();
+  const location = useLocation();
   const handleEventClick = (eventID: string) => {
-    navigate("/" + eventID);
+    navigate({
+      pathname: "/" + eventID,
+      search: location.search,
+    });
   };
 
   return (

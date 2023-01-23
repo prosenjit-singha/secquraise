@@ -30,25 +30,26 @@ function Events() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [openFilter, setOpenFilter] = useState(false);
   const { eventID } = useParams();
+  const { filteredData: data, isLoading } = useEvents();
 
   const {
     setFilterOpt,
     filterOpt: { location, gender },
   } = useEvents();
 
-  const { data = [], isLoading } = useQuery<Event[]>({
-    queryKey: ["events"],
-    queryFn: async () =>
-      axios
-        .get("https://secquraise-pj-default-rtdb.firebaseio.com/events.json")
-        .then((res) => res.data),
-    select: (data) =>
-      filterEvents(data, {
-        location,
-        gender,
-        date: searchParams.get("date") || "",
-      }),
-  });
+  // const { data = [], isLoading } = useQuery<Event[]>({
+  //   queryKey: ["events"],
+  //   queryFn: async () =>
+  //     axios
+  //       .get("https://secquraise-pj-default-rtdb.firebaseio.com/events.json")
+  //       .then((res) => res.data),
+  //   select: (data) =>
+  //     filterEvents(data, {
+  //       location,
+  //       gender,
+  //       date: searchParams.get("date") || "",
+  //     }),
+  // });
 
   const locationList = ["Chennai", "Hyderabad", "Bangalore"];
   const genderList = ["male", "female"];

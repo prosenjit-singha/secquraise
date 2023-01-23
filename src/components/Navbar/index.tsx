@@ -27,9 +27,9 @@ function Navbar() {
   const { mode, toggleTheme } = useThemeToggler();
   const isMd = useBreakpoint(900);
   const [openEvents, setOpenEvents] = useState(false);
-  const { data } = useEvents();
+  const { filteredData } = useEvents();
 
-  const genderCountInfo = genderCount(data);
+  const genderCountInfo = genderCount(filteredData);
 
   useEffect(() => {
     if (!isMd) setOpenEvents(false);

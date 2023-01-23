@@ -14,6 +14,7 @@ type FilterOpt = {
 
 type Value = {
   data: Event[];
+  filteredData: Event[];
   filterOpt: FilterOpt;
   setFilterOpt: React.Dispatch<React.SetStateAction<FilterOpt>>;
   isLoading: boolean;
@@ -27,6 +28,7 @@ function EventsProvider({ children }: { children: React.ReactNode }) {
   const [searchParams, setSearchParam] = useSearchParams();
   const [isLoading, setLoading] = useState(true);
   const [events, setEvents] = useState<Event[]>([]);
+  const [filteredEvents, setFilteredEvents] = useState<Event[]>([]);
   const [filterOpt, setFilterOpt] = useState<FilterOpt>({
     location: "",
     gender: "",
@@ -35,40 +37,41 @@ function EventsProvider({ children }: { children: React.ReactNode }) {
 
   const value = {
     data: events,
+    filteredData: filteredEvents,
     filterOpt,
     setFilterOpt,
     isLoading,
     setLoading,
   };
 
+  // filter side effects
   useEffect(() => {
     onValue(eventsRef, (snapshot) => {
       const data = snapshot.val();
       setEvents(data);
+      setFilteredEvents(data);
       setLoading(false);
     });
-
     const sp = Object.fromEntries([...searchParams]);
     const filterData: FilterOpt = {
       location: sp.location || "",
       gender: sp.gender || "",
-      date: dayjs(sp.date) || null,
+      date: sp.date ? dayjs(sp.date) : null,
     };
     setFilterOpt(filterData);
   }, []);
 
-  // filter side effects
   useEffect(() => {
-    setEvents((prev) =>
-      filterEvents(prev, {
+    setFilteredEvents(
+      filterEvents(events, {
         location: filterOpt.location,
         gender: filterOpt.gender,
-        date: searchParams.get("date") || "",
+        date: filterOpt.date ? filterOpt.date.format("D-MMM-YY") : undefined,
       })
     );
-  }, []);
+  }, [filterOpt]);
 
-  // console.info(filterOpt);
+  // console.info(filteredEvents.length);
 
   return (
     <EventsContext.Provider value={value}>{children}</EventsContext.Provider>

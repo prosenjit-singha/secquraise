@@ -36,7 +36,7 @@ const filterEvents = (data: Event[], { location, gender, date }: Options) => {
           event.Gender.toLowerCase() === gender.toLowerCase()
       );
     }
-    if (date) {
+    if (!!date) {
       // location + date
       return data.filter(
         (event) =>
@@ -49,7 +49,7 @@ const filterEvents = (data: Event[], { location, gender, date }: Options) => {
       (event) => event.Location.toLowerCase() === location.toLowerCase()
     );
   } else if (gender) {
-    if (date) {
+    if (!!date) {
       // GENDER + DATE
       return data.filter(
         (event) =>
@@ -61,7 +61,7 @@ const filterEvents = (data: Event[], { location, gender, date }: Options) => {
     return data.filter(
       (event) => event.Gender.toLowerCase() === gender.toLowerCase()
     );
-  } else if (date) {
+  } else if (!!date) {
     return data.filter(
       (event) => event.Date === dayjs(date).format("D-MMM-YY")
     );
