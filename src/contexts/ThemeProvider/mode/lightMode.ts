@@ -10,6 +10,10 @@ export const lightMode = createTheme({
     secondary: {
       main: "#ff0000",
     },
+    background: {
+      default: "#f7ffff",
+      paper: "#ebffff",
+    },
   },
   ...commonStyles,
 });

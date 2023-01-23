@@ -10,6 +10,10 @@ export const darkMode = createTheme({
     secondary: {
       main: "#ff0000",
     },
+    background: {
+      default: "#0d1212",
+      paper: "#0a0f0f",
+    },
   },
   ...commonStyles,
 });

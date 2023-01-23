@@ -1,4 +1,4 @@
-import { Theme, css, lighten, colors } from "@mui/material";
+import { Theme, css, colors } from "@mui/material";
 
 export const globalStyles = (theme: Theme) => css`
   * {
