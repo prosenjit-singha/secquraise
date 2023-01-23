@@ -18,3 +18,10 @@ A simple event handler demo project.
 - `material ui`
 - `firebase`
 - `react-use-size`
+
+## SCREENSHOTS
+
+![Home](media/desktop-light-mode.png)
+![Dark Mode](media/desktop-dark-mode.png)
+![filter mode show](media/desktop-dark-mode-filter.png)
+![filter with date](media/date-filtering-feature.png)
