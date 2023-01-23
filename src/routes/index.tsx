@@ -9,7 +9,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        loader: () => redirect("/ETV0001"), // as there is no home pase this will redirect to the events page
+        loader: () => redirect("/EVT0001"), // as there is no home pase this will redirect to the events page
         // element: <Home />,
       },
       {

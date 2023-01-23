@@ -9,6 +9,7 @@ import {
   ListItemIcon,
   Skeleton,
   Collapse,
+  Tooltip,
 } from "@mui/material";
 import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 import { useParams, useSearchParams } from "react-router-dom";
@@ -75,12 +76,11 @@ function Events() {
           <Typography variant="h5" component="h1">
             Events
           </Typography>
-          <IconButton
-            title="Filter"
-            onClick={() => setOpenFilter((prev) => !prev)}
-          >
-            <TuneRoundedIcon />
-          </IconButton>
+          <Tooltip title="Show/hide Filter" describeChild>
+            <IconButton onClick={() => setOpenFilter((prev) => !prev)}>
+              <TuneRoundedIcon />
+            </IconButton>
+          </Tooltip>
         </Box>
         <Collapse in={openFilter}>
           <Box display="flex" gap="8px" mb={1.5} mt={1}>

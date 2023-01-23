@@ -15,6 +15,7 @@ import {
   IconButton,
   lighten,
   Drawer,
+  Tooltip,
 } from "@mui/material";
 import { useThemeToggler } from "../../contexts/ThemeProvider";
 import EventsIcon from "@mui/icons-material/EventNote";
@@ -77,37 +78,37 @@ function Navbar() {
 
         {/* Male & Female */}
         <Stack direction="row" spacing={1}>
-          <Chip
-            icon={<MaleIcon aria-label="Male Icon" />}
-            color="success"
-            label={genderCountInfo.male}
-            aria-label="Male Count"
-          />
-          <Chip
-            icon={<FemaleIcon aria-label="Female Icon" />}
-            color="error"
-            label={genderCountInfo.female}
-            aria-label="Female Count"
-          />
+          <Tooltip title="Male" describeChild>
+            <Chip
+              icon={<MaleIcon aria-label="Male Icon" />}
+              color="success"
+              label={genderCountInfo.male}
+            />
+          </Tooltip>
+          <Tooltip title="Female" describeChild>
+            <Chip
+              icon={<FemaleIcon aria-label="Female Icon" />}
+              color="error"
+              label={genderCountInfo.female}
+            />
+          </Tooltip>
         </Stack>
 
         {/* Toggle Theme */}
-        <IconButton
-          onClick={toggleTheme}
-          title="Toggle Theme"
-          aria-label="Toggle Theme"
-        >
-          {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
-        </IconButton>
+        <Tooltip title="Toggle Theme" describeChild>
+          <IconButton onClick={toggleTheme}>
+            {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+          </IconButton>
+        </Tooltip>
 
-        <IconButton
-          onClick={() => setOpenEvents((prev) => !prev)}
-          sx={{ display: ["flex", "flex", "none"] }}
-          title="Show/Hide Events"
-          aria-label="Show/Hide Events"
-        >
-          <EventsIcon />
-        </IconButton>
+        <Tooltip title="Show/hide Events" describeChild>
+          <IconButton
+            onClick={() => setOpenEvents((prev) => !prev)}
+            sx={{ display: ["flex", "flex", "none"] }}
+          >
+            <EventsIcon />
+          </IconButton>
+        </Tooltip>
       </Toolbar>
       <Drawer
         anchor="right"

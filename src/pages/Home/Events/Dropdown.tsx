@@ -46,7 +46,7 @@ function Dropdown<T extends string>({
           <em>None</em>
         </MenuItem>
         {list.map((v) => (
-          <MenuItem key={v} value={v}>
+          <MenuItem key={v} value={v} sx={{ textTransform: "capitalize" }}>
             {v}
           </MenuItem>
         ))}
