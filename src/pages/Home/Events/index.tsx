@@ -64,26 +64,14 @@ function Events() {
   };
 
   return (
-    <Paper
-      elevation={5}
-      sx={{
-        display: ["none", "none", "block"],
-        position: "sticky",
-        top: "75px",
-        width: "40%",
-        minWidth: "355px",
-        maxHeight: "calc(100vh - 80px)",
-        overflow: "auto",
-        m: 1,
-        mr: [2, 3],
-      }}
-    >
+    <>
       {/* Header */}
       <Paper
         sx={{
           position: "sticky",
           top: 0,
           left: 0,
+          // minWidth: "380px",
           width: "100%",
           p: 2,
           borderRadius: 0,
@@ -136,7 +124,7 @@ function Events() {
           <EventListItem event={event} eventID={eventID} key={event.ID} />
         ))}
       </List>
-    </Paper>
+    </>
   );
 }
 

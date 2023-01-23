@@ -13,7 +13,7 @@ function Root() {
       <Box
         component="main"
         sx={{
-          mt: [8],
+          mt: [7, 8],
           display: "flex",
           minHeight: "calc(100vh - 64px)",
           alignItems: "stretch",
@@ -28,12 +28,20 @@ function Root() {
             pr: 2,
           })}
         >
-          <IconButton title="Menu" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
-          <IconButton title="Logout" sx={{ mt: "auto" }} aria-label="Log Out">
-            <LogoutIcon />
-          </IconButton>
+          <Stack
+            sx={{
+              position: "sticky",
+              top: ["56px", "64px"],
+              minHeight: ["calc(100vh - 64px)"],
+            }}
+          >
+            <IconButton title="Menu" aria-label="Menu">
+              <MenuIcon />
+            </IconButton>
+            <IconButton title="Logout" sx={{ mt: "auto" }} aria-label="Log Out">
+              <LogoutIcon />
+            </IconButton>
+          </Stack>
         </Stack>
         {/* Left Bar Ends */}
 

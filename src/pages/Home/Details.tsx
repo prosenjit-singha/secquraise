@@ -45,7 +45,7 @@ function Details() {
     return (
       <Stack
         sx={{
-          width: ["100%", "100%", "60%"],
+          width: ["100%", "100%", "60%", "70%"],
           height: "fit-content",
           py: 3,
           px: 2,

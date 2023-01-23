@@ -1,27 +1,30 @@
-import logo from "../../assets/logo-250px.png";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import MaleIcon from "@mui/icons-material/Person";
 import FemaleIcon from "@mui/icons-material/Person2";
 import SearchIcon from "@mui/icons-material/Search";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
-
 import Logo from "../Logo";
 import {
   AppBar,
   Toolbar,
-  colors,
   Stack,
   Chip,
   Box,
   InputBase,
   IconButton,
   lighten,
+  Drawer,
 } from "@mui/material";
 import { useThemeToggler } from "../../contexts/ThemeProvider";
+import EventsIcon from "@mui/icons-material/EventNote";
+import Events from "../../pages/Home/Events";
 
 function Navbar() {
   const { mode, toggleTheme } = useThemeToggler();
+
+  const [openEvents, setOpenEvents] = useState(false);
+
   return (
     <AppBar
       sx={(theme) => ({
@@ -61,6 +64,7 @@ function Navbar() {
             }}
           />
         </Box>
+
         {/* Male & Female */}
         <Stack direction="row" spacing={1}>
           <Chip
@@ -76,6 +80,8 @@ function Navbar() {
             aria-label="Female Count"
           />
         </Stack>
+
+        {/* Toggle Theme */}
         <IconButton
           onClick={toggleTheme}
           title="Toggle Theme"
@@ -83,7 +89,27 @@ function Navbar() {
         >
           {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
         </IconButton>
+
+        <IconButton
+          onClick={() => setOpenEvents((prev) => !prev)}
+          sx={{ display: ["flex", "flex", "none"] }}
+          title="Show/Hide Events"
+          aria-label="Show/Hide Events"
+        >
+          <EventsIcon />
+        </IconButton>
       </Toolbar>
+      <Drawer
+        anchor="right"
+        open={openEvents}
+        onClose={() => setOpenEvents(false)}
+        sx={{
+          minWidth: "355px",
+        }}
+      >
+        <Events />
+        {/* <h1>Test </h1> */}
+      </Drawer>
     </AppBar>
   );
 }
