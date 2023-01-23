@@ -48,17 +48,26 @@ function EventsProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     onValue(eventsRef, (snapshot) => {
       const data = snapshot.val();
+      const sp = Object.fromEntries([...searchParams]);
+      const filterData: FilterOpt = {
+        location: sp.location || "",
+        gender: sp.gender || "",
+        date: sp.date ? dayjs(sp.date) : null,
+      };
+
+      setFilterOpt(filterData);
       setEvents(data);
-      setFilteredEvents(data);
+      setFilteredEvents(
+        filterEvents(events, {
+          location: filterData.location,
+          gender: filterData.gender,
+          date: filterData.date
+            ? filterData.date.format("D-MMM-YY")
+            : undefined,
+        })
+      );
       setLoading(false);
     });
-    const sp = Object.fromEntries([...searchParams]);
-    const filterData: FilterOpt = {
-      location: sp.location || "",
-      gender: sp.gender || "",
-      date: sp.date ? dayjs(sp.date) : null,
-    };
-    setFilterOpt(filterData);
   }, []);
 
   useEffect(() => {
