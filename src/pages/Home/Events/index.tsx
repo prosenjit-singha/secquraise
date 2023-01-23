@@ -67,6 +67,7 @@ function Events() {
     <Paper
       elevation={5}
       sx={{
+        display: ["none", "none", "block"],
         position: "sticky",
         top: "75px",
         width: "40%",

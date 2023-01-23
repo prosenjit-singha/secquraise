@@ -43,7 +43,14 @@ function Details() {
 
   if (data)
     return (
-      <Stack sx={{ width: "60%", height: "fit-content", py: 3, px: 2 }}>
+      <Stack
+        sx={{
+          width: ["100%", "100%", "60%"],
+          height: "fit-content",
+          py: 3,
+          px: 2,
+        }}
+      >
         <Box
           sx={{
             height: "fit-content",
@@ -60,7 +67,7 @@ function Details() {
         </Box>
         <Stack
           sx={{
-            flexDirection: ["column-reverse", "column-reverse", "row"],
+            flexDirection: ["column-reverse", "row", "row"],
             gap: [2, 3, 1],
           }}
         >
