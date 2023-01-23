@@ -18,12 +18,12 @@ import { Event } from "../../../types/event.type";
 import MaleIcon from "@mui/icons-material/MaleRounded";
 import FemaleIcon from "@mui/icons-material/FemaleRounded";
 import { format } from "date-fns";
-// import LoadingSkeleton from "./LoadingSkeleton";
+import LoadingSkeleton from "./LoadingSkeleton";
 import { useEvents } from "../../../contexts/EventsProvider";
 
 function Details() {
   const { eventID } = useParams();
-  const { data: dataList } = useEvents();
+  const { data: dataList, isLoading } = useEvents();
   const [data, setData] = useState<Event | null>(null);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function Details() {
   const getPhotoURL = (name: string) =>
     `https://firebasestorage.googleapis.com/v0/b/secquraise-pj.appspot.com/o/Images%2F${name}.jpg?alt=media`;
 
-  // if (isLoading) return <LoadingSkeleton />;
+  if (isLoading) return <LoadingSkeleton />;
 
   if (data)
     return (
