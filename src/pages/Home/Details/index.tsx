@@ -17,10 +17,10 @@ import { Event } from "../../../types/event.type";
 // icons
 import MaleIcon from "@mui/icons-material/MaleRounded";
 import FemaleIcon from "@mui/icons-material/FemaleRounded";
-import { format } from "date-fns";
 import LoadingSkeleton from "./LoadingSkeleton";
 import { useEvents } from "../../../contexts/EventsProvider";
 import NoData from "./NoData";
+import dayjs from "dayjs";
 
 function Details() {
   const { eventID } = useParams();
@@ -136,9 +136,9 @@ export default Details;
 const FormatDate = ({ value }: { value: string }) => {
   return (
     <>
-      {format(new Date(value), "d")}
+      {dayjs(value).format("D")}
       <sup>th</sup>
-      {format(new Date(value), "LLLL")}, {format(new Date(value), "yyyy")}
+      {dayjs(value).format("MMM")}, {dayjs(value).format("YYYY")}
     </>
   );
 };
