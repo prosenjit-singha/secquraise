@@ -134,6 +134,7 @@ function Details() {
 export default Details;
 
 const FormatDate = ({ value }: { value: string }) => {
+  // console.info(new Date(value));
   return (
     <>
       {dayjs(value).format("D")}
