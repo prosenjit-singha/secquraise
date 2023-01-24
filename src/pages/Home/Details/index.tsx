@@ -20,6 +20,7 @@ import FemaleIcon from "@mui/icons-material/FemaleRounded";
 import { format } from "date-fns";
 import LoadingSkeleton from "./LoadingSkeleton";
 import { useEvents } from "../../../contexts/EventsProvider";
+import NoData from "./NoData";
 
 function Details() {
   const { eventID } = useParams();
@@ -115,7 +116,19 @@ function Details() {
       </Stack>
     );
 
-  return <Box sx={{ width: ["100%", "100%", "60%", "70%"] }}></Box>;
+  return (
+    <Box
+      sx={{
+        width: ["100%", "100%", "60%", "70%"],
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <NoData id={eventID} />
+    </Box>
+  );
 }
 
 export default Details;
