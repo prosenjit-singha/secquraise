@@ -111,8 +111,8 @@ function Events({ onClose }: { onClose?: () => void }) {
           <DatePicker />
         </Collapse>
       </Paper>
-      {/* List */}
 
+      {/* List */}
       <List sx={{ px: [1, 2] }}>
         {isLoading && [...Array(10)].map((_, i) => <ListSkeleton key={i} />)}
         {data.map((event) => (

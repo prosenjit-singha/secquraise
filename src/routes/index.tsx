@@ -1,6 +1,7 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import Root from "../layouts/Root";
 import Home from "../pages/Home";
+import PageNotFound from "../pages/PageNotFound";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: ":eventID",
         element: <Home />,
+      },
+      {
+        path: "*",
+        element: <PageNotFound />,
       },
     ],
   },
