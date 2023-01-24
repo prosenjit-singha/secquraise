@@ -18,6 +18,7 @@ type Options = {
  */
 
 const filterEvents = (data: Event[], { location, gender, date }: Options) => {
+  // console.info(date);
   if (location) {
     if (gender) {
       if (date) {

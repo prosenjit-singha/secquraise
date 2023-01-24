@@ -11,7 +11,7 @@ function DatePicker() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DP
-        label="Basic example"
+        label="Date Picker"
         value={filterOpt.date}
         onChange={(newValue) => {
           setFilterOpt((prev) => ({ ...prev, date: newValue }));

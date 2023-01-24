@@ -15,7 +15,7 @@ function Home() {
           width: ["40%", "40%", "40%", "30%"],
           minWidth: "355px",
           maxHeight: "calc(100vh - 80px)",
-          overflow: "overlay",
+          overflow: "auto",
           m: 1,
           mr: [2, 3],
         }}

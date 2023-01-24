@@ -68,19 +68,7 @@ function EventsProvider({ children }: { children: React.ReactNode }) {
       );
       setLoading(false);
     });
-  }, [eventsRef, searchParams]);
-
-  useEffect(() => {
-    setFilteredEvents(
-      filterEvents(events, {
-        location: filterOpt.location,
-        gender: filterOpt.gender,
-        date: filterOpt.date ? filterOpt.date.format("D-MMM-YY") : undefined,
-      })
-    );
-  }, [filterOpt, events]);
-
-  // console.info(filteredEvents.length);
+  }, [eventsRef]);
 
   return (
     <EventsContext.Provider value={value}>{children}</EventsContext.Provider>
