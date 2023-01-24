@@ -118,7 +118,7 @@ function Navbar() {
           minWidth: "355px",
         }}
       >
-        <Events />
+        <Events onClose={() => setOpenEvents(false)} />
         {/* <h1>Test </h1> */}
       </Drawer>
     </AppBar>

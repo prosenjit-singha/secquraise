@@ -18,9 +18,10 @@ import dayjs from "dayjs";
 type Props = {
   event: Event;
   eventID?: string;
+  onClick?: () => void;
 };
 
-function EventListItem({ event, eventID }: Props) {
+function EventListItem({ event, eventID, onClick }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
   const handleEventClick = (eventID: string) => {
@@ -28,6 +29,7 @@ function EventListItem({ event, eventID }: Props) {
       pathname: "/" + eventID,
       search: location.search,
     });
+    if (!!onClick) onClick();
   };
 
   return (

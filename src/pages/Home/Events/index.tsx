@@ -18,12 +18,14 @@ import { useParams, useSearchParams } from "react-router-dom";
 import ClockIcon from "@mui/icons-material/AccessTimeRounded";
 import CalendarIcon from "@mui/icons-material/CalendarMonthRounded";
 import EventListItem from "./EventListItem";
+import CloseIcon from "@mui/icons-material/CloseRounded";
+
 import { useState } from "react";
 import Dropdown from "./Dropdown";
 import DatePicker from "./DatePicker";
 import { useEvents } from "../../../contexts/EventsProvider";
 
-function Events() {
+function Events({ onClose }: { onClose?: () => void }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [openFilter, setOpenFilter] = useState(false);
   const { eventID } = useParams();
@@ -69,16 +71,25 @@ function Events() {
           sx={{
             width: "100%",
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
             alignItems: "center",
           }}
         >
-          <Typography variant="h5" component="h1">
+          <Typography variant="h5" component="h1" mr="auto">
             Events
           </Typography>
           <Tooltip title="Show/hide Filter" describeChild>
             <IconButton onClick={() => setOpenFilter((prev) => !prev)}>
               <TuneRoundedIcon />
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title="Close Events" describeChild>
+            <IconButton
+              sx={{ display: ["flex", "flex", "none"] }}
+              onClick={() => (!!onClose ? onClose() : null)}
+            >
+              <CloseIcon />
             </IconButton>
           </Tooltip>
         </Box>
@@ -105,7 +116,12 @@ function Events() {
       <List sx={{ px: [1, 2] }}>
         {isLoading && [...Array(10)].map((_, i) => <ListSkeleton key={i} />)}
         {data.map((event) => (
-          <EventListItem event={event} eventID={eventID} key={event.ID} />
+          <EventListItem
+            event={event}
+            eventID={eventID}
+            onClick={onClose}
+            key={event.ID}
+          />
         ))}
       </List>
     </>
