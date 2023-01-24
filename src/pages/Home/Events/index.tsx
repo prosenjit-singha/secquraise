@@ -24,6 +24,7 @@ import { useState } from "react";
 import Dropdown from "./Dropdown";
 import DatePicker from "./DatePicker";
 import { useEvents } from "../../../contexts/EventsProvider";
+import NoEventsFound from "./NoEventsFound";
 
 function Events({ onClose }: { onClose?: () => void }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -37,7 +38,7 @@ function Events({ onClose }: { onClose?: () => void }) {
   } = useEvents();
 
   const locationList = ["Chennai", "Hyderabad", "Bangalore"];
-  const genderList = ["male", "female"];
+  const genderList = ["Male", "Female"];
 
   const onDropItemClick = (label: string, v: string) => {
     setFilterOpt((prev) => ({ ...prev, [label.toLowerCase()]: v }));
@@ -124,6 +125,7 @@ function Events({ onClose }: { onClose?: () => void }) {
           />
         ))}
       </List>
+      {!data.length && <NoEventsFound />}
     </>
   );
 }
