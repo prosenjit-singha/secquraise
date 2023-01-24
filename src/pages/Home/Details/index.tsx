@@ -21,6 +21,7 @@ import LoadingSkeleton from "./LoadingSkeleton";
 import { useEvents } from "../../../contexts/EventsProvider";
 import NoData from "./NoData";
 import dayjs from "dayjs";
+import formatDate from "../../../utils/formatDate";
 
 function Details() {
   const { eventID } = useParams();
@@ -134,12 +135,12 @@ function Details() {
 export default Details;
 
 const FormatDate = ({ value }: { value: string }) => {
-  // console.info(new Date(value));
+  const date = formatDate(value);
   return (
     <>
-      {dayjs(value).format("D")}
+      {dayjs(date).format("D")}
       <sup>th</sup>
-      {dayjs(value).format("MMM")}, {dayjs(value).format("YYYY")}
+      {dayjs(date).format("MMM")}, {dayjs(date).format("YYYY")}
     </>
   );
 };

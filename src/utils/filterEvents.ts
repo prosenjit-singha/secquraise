@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { Event } from "../types/event.type";
+import formatDate from "./formatDate";
 
 type Options = {
   location?: string;
@@ -18,7 +19,8 @@ type Options = {
  */
 
 const filterEvents = (data: Event[], { location, gender, date }: Options) => {
-  // console.info(date);
+  const formattedDate = date ? formatDate(date) : undefined;
+
   if (location) {
     if (gender) {
       if (date) {
@@ -27,7 +29,7 @@ const filterEvents = (data: Event[], { location, gender, date }: Options) => {
           (event) =>
             event.Location.toLowerCase() === location.toLowerCase() &&
             event.Gender.toLowerCase() === gender.toLowerCase() &&
-            event.Date === dayjs(date).format("D-MMM-YY")
+            event.Date === dayjs(formattedDate).format("D-MMM-YY")
         );
       }
       // location + gender
@@ -42,7 +44,7 @@ const filterEvents = (data: Event[], { location, gender, date }: Options) => {
       return data.filter(
         (event) =>
           event.Location.toLowerCase() === location.toLowerCase() &&
-          event.Date === dayjs(date).format("D-MMM-YY")
+          event.Date === dayjs(formattedDate).format("D-MMM-YY")
       );
     }
     // location
@@ -55,7 +57,7 @@ const filterEvents = (data: Event[], { location, gender, date }: Options) => {
       return data.filter(
         (event) =>
           event.Gender.toLowerCase() === gender.toLowerCase() &&
-          event.Date === dayjs(date).format("D-MMM-YY")
+          event.Date === dayjs(formattedDate).format("D-MMM-YY")
       );
     }
     // gender
@@ -64,7 +66,7 @@ const filterEvents = (data: Event[], { location, gender, date }: Options) => {
     );
   } else if (!!date) {
     return data.filter(
-      (event) => event.Date === dayjs(date).format("D-MMM-YY")
+      (event) => event.Date === dayjs(formattedDate).format("D-MMM-YY")
     );
   } else return data;
 };

@@ -5,6 +5,7 @@ import { Event } from "../../types/event.type";
 import dayjs, { Dayjs } from "dayjs";
 import filterEvents from "../../utils/filterEvents";
 import { useSearchParams } from "react-router-dom";
+import formatDate from "../../utils/formatDate";
 
 type FilterOpt = {
   location: string;
@@ -52,7 +53,7 @@ function EventsProvider({ children }: { children: React.ReactNode }) {
       const filterData: FilterOpt = {
         location: sp.location || "",
         gender: sp.gender || "",
-        date: sp.date ? dayjs(sp.date) : null,
+        date: sp.date ? dayjs(formatDate(sp.date)) : null,
       };
 
       setFilterOpt(filterData);
@@ -69,6 +70,8 @@ function EventsProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
     });
   }, []);
+
+  // console.info(filterOpt);
 
   useEffect(() => {
     setFilteredEvents(
